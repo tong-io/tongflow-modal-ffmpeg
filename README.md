@@ -1,6 +1,6 @@
 # tongflow-modal-ffmpeg
 
-Official TongFlow plugin. Media transcoding, muxing, and frame/track extraction with **FFmpeg**, running on [Modal](https://modal.com). No model weights — pure media processing.
+Official [TongFlow](https://github.com/tong-io/tongflow) plugin. Media transcoding, muxing, and frame/track extraction with **FFmpeg**, running on [Modal](https://modal.com). No model weights — pure media processing.
 
 ## Capabilities
 
