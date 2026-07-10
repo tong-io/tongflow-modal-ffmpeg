@@ -1,4 +1,9 @@
 {
+    "plugin": {
+        "name": "FFmpeg",
+        "description": "Media transcoding, muxing, and frame/track extraction with FFmpeg. No model weights — pure media processing.",
+        "icon": "/plugins/tongflow-modal-ffmpeg.svg"
+    },
     "env": [
         {
             "key": "MODAL_TOKEN_ID",
