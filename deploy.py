@@ -27,7 +27,7 @@ image = (
     modal.Image.debian_slim(python_version="3.13")
     .apt_install("ffmpeg")
     .uv_pip_install(
-        "tongflow==0.1.0",
+        "tongflow==0.2.13", "fastapi[standard]",
         "moviepy",
     )
 )
@@ -318,3 +318,18 @@ class Inference:
             out = in_path.with_suffix(".png")
             get_last_frame_helper(in_path, out)
             return GetLastFrameOutput(success=True, image=asset_from_path(out))
+
+    @modal.fastapi_endpoint(method="GET", label=f"{Path(__file__).resolve().parent.name}-serve")
+    def serve(self, taskId: str = "", token: str = "", origin: str = ""):
+        from fastapi.responses import StreamingResponse
+        from tongflow import serve_stream_from_spec
+
+        return StreamingResponse(
+            serve_stream_from_spec(
+                origin, taskId, token, __file__,
+                invoke=lambda m, inp: getattr(self, m).local(inp),
+            ),
+            media_type="text/event-stream",
+            headers={"Cache-Control": "no-cache", "Access-Control-Allow-Origin": "*"},
+        )
+
