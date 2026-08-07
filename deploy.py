@@ -229,7 +229,7 @@ DEFAULT_AUDIO_FORMAT = "mp3"
 
 
 @deploy
-@app.cls(image=image, cpu=0.5, memory=1024, timeout=3600, scaledown_window=5)
+@app.cls(image=image, cpu=0.5, memory=1024, timeout=3600, scaledown_window=2)
 class Inference:
     @modal.method()
     @node_slot(NodeSlots.CONCAT_VIDEOS)
